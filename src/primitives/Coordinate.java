@@ -1,7 +1,7 @@
 package primitives;
 
 public class Coordinate {
-	private double coord;
+	double coord;
 	
 	
 
