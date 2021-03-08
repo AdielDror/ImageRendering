@@ -74,12 +74,9 @@ public class Vector {
 
     }
 
-    public Vector normalize() {//need with "this"
-        return null;
-       /*this._head._x/length();
-        return this; *//*((_head._x.coord / length()),
-                (_head._y.coord / length()),
-                (_head._z.coord / length()));*/
+    public Vector normalize() {
+        //(_head._x / length()),(_head._y / length(),_head._z / length());
+        return this;
     }
 
     public Vector normalized() {
