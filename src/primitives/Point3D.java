@@ -43,7 +43,8 @@ public class Point3D {
 	}
 	
 	public Vector subtract(Point3D point3D) {
-		return new Vector(point3D._x.coord - _x.coord ,point3D._y.coord  - _y.coord , point3D._z.coord - _z.coord);
+		//return new Vector(point3D._x.coord - _x.coord ,point3D._y.coord  - _y.coord , point3D._z.coord - _z.coord);
+		return new Vector(_x.coord - point3D._x.coord ,_y.coord  - point3D._y.coord , _z.coord - point3D._z.coord);
 	}
 	
 	public double distanceSquared(Point3D point3D) {

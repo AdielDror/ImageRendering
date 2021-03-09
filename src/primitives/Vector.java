@@ -8,23 +8,24 @@ public class Vector {
 
     
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
-        if (x.equals(ZERO) && y.equals(ZERO) && z.equals(ZERO))
+        if ((x.equals(0)) && (y.equals(0)) && (z.equals(0)))
             throw new IllegalArgumentException("head of vector cannot be Point(0,0,0)");
         _head = new Point3D(x, y, z);
 
     }
 
     public Vector(Point3D head) {
-        if (head.equals(ZERO)) {
-            throw new IllegalArgumentException("head of vector cannot be Point(0,0,0)");
-
-        }
+       
         _head = new Point3D(head._x, head._y, head._z);
     }
 
     public Vector(double x, double y, double z) {
+    	_head = new Point3D(x, y, z);
+    	  if (_head.equals(ZERO)) {
+              throw new IllegalArgumentException("head of vector cannot be Point(0,0,0)");
 
-        _head = new Point3D(x, y, z);
+          }
+        
     }
 
 
@@ -51,13 +52,13 @@ public class Vector {
     }
 
     public Vector crossProduct(Vector vector) {
-         Vector v1 = new Vector(_head._y.coord * vector._head._z.coord - _head._z.coord * vector._head._y.coord,
-                _head._z.coord * vector._head._x.coord - _head._x.coord * vector._head._z.coord,
-                _head._x.coord * vector._head._y.coord - _head._y.coord * vector._head._x.coord);
-         if(v1.equals(ZERO)) {
+         Vector v3 = new Vector((_head._y.coord * vector._head._z.coord) - (_head._z.coord * vector._head._y.coord),
+                (_head._z.coord * vector._head._x.coord) - (_head._x.coord * vector._head._z.coord),
+                (_head._x.coord * vector._head._y.coord - _head._y.coord * vector._head._x.coord));
+         if(v3.equals(ZERO)) {
         	 throw new IllegalArgumentException("cross product of the vectors can't be Point(0,0,0)");
          }
-         return v1;
+         return v3;
     }
 
     public double dotProduct(Vector vector) {
