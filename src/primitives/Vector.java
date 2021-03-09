@@ -6,7 +6,8 @@ import static primitives.Point3D.ZERO;
 public class Vector {
     Point3D _head;
 
-    public Vector(Coordinate x, Coordinate y, Coordinate z) {
+    
+	public Vector(Coordinate x, Coordinate y, Coordinate z) {
         if (x.equals(ZERO) && y.equals(ZERO) && z.equals(ZERO))
             throw new IllegalArgumentException("head of vector cannot be Point(0,0,0)");
         _head = new Point3D(x, y, z);
@@ -50,9 +51,13 @@ public class Vector {
     }
 
     public Vector crossProduct(Vector vector) {
-        return new Vector(_head._y.coord * vector._head._z.coord - _head._z.coord * vector._head._y.coord,
+         Vector v1 = new Vector(_head._y.coord * vector._head._z.coord - _head._z.coord * vector._head._y.coord,
                 _head._z.coord * vector._head._x.coord - _head._x.coord * vector._head._z.coord,
                 _head._x.coord * vector._head._y.coord - _head._y.coord * vector._head._x.coord);
+         if(v1.equals(ZERO)) {
+        	 throw new IllegalArgumentException("cross product of the vectors can't be Point(0,0,0)");
+         }
+         return v1;
     }
 
     public double dotProduct(Vector vector) {
@@ -75,7 +80,14 @@ public class Vector {
     }
 
     public Vector normalize() {
-        //(_head._x / length()),(_head._y / length(),_head._z / length());
+        double length = this.length();
+        if(length == 0) {
+        	throw new ArithmeticException("divide by zero");
+        }
+        double x = this._head._x.coord;
+        double y = this._head._y.coord;
+        double z = this._head._z.coord;
+        this._head = new Point3D(x / length, y / length, z / length);
         return this;
     }
 

@@ -5,16 +5,27 @@ import primitives.Vector;
 
 public class Plane implements Geometry{
 	
-	Point3D q0;
-	Vector normal;
+	final Point3D q0;
+	final Vector normal;
 	
 	
 	public Plane(Point3D q0, Vector normal) {
 		this.q0 = q0;
 		this.normal = normal;
 	}
+	
+	
 
 	
+	public Plane(Point3D p1, Point3D p2, Point3D p3) {
+		this.q0 = p1;
+		this.normal = null;
+		
+	}
+
+
+
+
 	public Point3D getQ0() {
 		return q0;
 	}
