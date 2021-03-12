@@ -1,3 +1,7 @@
+//Adiel Dror 301560579 adiel.dror2@gmail.com
+//
+//Dovi Goldberg 301637922 dovi4344@gmail.com
+
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
