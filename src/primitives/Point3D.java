@@ -42,30 +42,7 @@ public class Point3D {
 		_z = new Coordinate(z);
 	}
 
-	/**
-	 * 
-	 * @return x coordinate
-	 */
-	public Coordinate get_x() {
-		return _x;
-	}
-
-	/**
-	 * 
-	 * @return y coordinate
-	 */
-	public Coordinate get_y() {
-		return _y;
-	}
-
-	/**
-	 * 
-	 * @return z coordinate
-	 */
-	public Coordinate get_z() {
-		return _z;
-	}
-
+	
 	/**
 	 * Adding between 2 points
 	 * 
