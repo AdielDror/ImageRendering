@@ -87,7 +87,8 @@ public class VectorTests {
 	public void testDotProduct() {
 		Vector v1 = new Vector(1,2,3);
 		Vector v2 = new Vector(4,5,6);
-		assertTrue("dotProduct() wrong result dotProduct",!isZero(v1.dotProduct(v2)));
+		Vector v3 = new Vector(0,-3,2);
+		assertTrue("dotProduct() wrong result dotProduct",isZero(v1.dotProduct(v3)));
 		assertTrue("dotProduct() wrong result dotProduct",isZero(v1.dotProduct(v2) - 32));
 	}
 
@@ -97,7 +98,6 @@ public class VectorTests {
 	@Test
 	public void testLengthSquared() {
 		Vector v1 = new Vector(1,2,3);
-		assertEquals("lengthSquared() wrong result lengthSquared",14,v1.lengthSquared(),0.0001);
 		assertTrue("lengthSquared() wrong result lengthSquared",isZero(v1.lengthSquared() - 14));
 	}
 
@@ -107,7 +107,6 @@ public class VectorTests {
 	@Test
 	public void testLength() {
 		Vector v1 = new Vector(0,3,4);
-		assertEquals("length() wrong result length",5,v1.length(),0.0001);
 		assertTrue("length() wrong result length",isZero(v1.length() - 5));
 	}
 
