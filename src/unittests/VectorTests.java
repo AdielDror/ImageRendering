@@ -117,10 +117,11 @@ public class VectorTests {
 	@Test
 	public void testNormalize() {
 		Vector v1 = new Vector(0,4,0);
-		Vector v2 = v1.normalize();
-		assertEquals("normalize() wrong result normalize",new Vector(0,1,0),v1.normalize());
-		assertTrue("normalize() wrong result normalize",isZero(v2.length() - 1));
-		assertTrue("normalize() wrong result normalize",v1.equals(v2));
+		Vector v3=new Vector(v1.getHead());
+		Vector v2 = v3.normalize();
+		assertEquals("ERROR: normalize() function creates a new vector",v2, v3);
+		assertTrue("ERROR: normalize() result is not a unit vector",isZero(v2.length() - 1));
+		
 	}
 
 	/**
@@ -130,8 +131,8 @@ public class VectorTests {
 	public void testNormalized() {
 		Vector v1 = new Vector(0,4,0);
 		Vector v2 = v1.normalized();
-		assertEquals("normalized() wrong result normalized",new Vector(0,1,0),v1.normalized());
-		assertTrue("normalized() wrong result normalize",!v1.equals(v2));
+		assertTrue("ERROR: normalized() function does not create a new vector",!v1.equals(v2));
+		
 	}
 
 	
