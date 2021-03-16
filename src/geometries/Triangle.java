@@ -1,7 +1,7 @@
 package geometries;
 
 import primitives.Point3D;
-import primitives.Vector;
+
 
 /**
  * Triangle class represent a polygon with three vertices.
@@ -26,10 +26,6 @@ public class Triangle extends Polygon{
 		return vertices + ", " + plane ;
 	}
 	
-	@Override
-	public Vector getNormal(Point3D point3d) {
-		return null;
-	}
-
+	
 	
 }
