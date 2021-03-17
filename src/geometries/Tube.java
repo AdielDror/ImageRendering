@@ -3,6 +3,7 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+import static primitives.Util.*;
 
 /**
  * Tube class represent tube by radius and ray.
@@ -49,10 +50,22 @@ public class Tube implements Geometry {
 
 	@Override
 	public Vector getNormal(Point3D point3d) {
-		Vector t=point3d.subtract(axisRay.getP0());
-		double projection=t.dotProduct(axisRay.getDir());
-		Point3D O=axisRay.getP0().add(axisRay.getDir().scale(projection));
+		Point3D p0 = axisRay.getP0();
+		Vector v = axisRay.getDir();
+
+		Vector p_p0 = point3d.subtract(p0);
+
+		double t = v.dotProduct(p_p0);
+		if (isZero(t)) {
+			return p_p0.normalize();
+		}
+
+		Point3D O = p0.add(v.scale(t));
+
+		if (O.equals(point3d))
+			throw new IllegalArgumentException("point cannot be the reference point of the tube");
+
 		Vector vector = point3d.subtract(O);
-		return vector.normalized();
+		return vector.normalize();
 	}
 }
