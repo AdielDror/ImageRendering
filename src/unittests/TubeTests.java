@@ -1,5 +1,5 @@
 /**
- * 
+ * Tests for a Tube class
  */
 package unittests;
 
@@ -20,18 +20,17 @@ public class TubeTests {
 	 */
 	@Test
 	public void testGetNormal() {
-		Tube tb = new Tube(new Ray(new Point3D(0, 0, 1), new Vector(new Point3D(1, 2, 3))), 5);
-		// ============ Equivalence Partitions Tests ==============
-
-		double sqrt2 = Math.sqrt(162);
+		Tube tb = new Tube(new Ray(new Point3D(1,0,0), new Vector(0,0,1)), 1);
 		
-		assertEquals("Bad normal to tube", new Vector(3 / sqrt2, 3 / sqrt2, 12 / sqrt2),
-				tb.getNormal(new Point3D(0, 3, -2)));
+		// ============ Equivalence Partitions Tests ==============
+		//Standard normal test
+		assertEquals("Bad normal to tube", new Vector(1,0,0),tb.getNormal(new Point3D(2,0,60)));
 
-		// =============== Boundary Values Tests ==================
-		double sqrt = Math.sqrt(13);
-		assertEquals("Bad normal to tube", new Vector(0, 3 / sqrt, -2 / sqrt), tb.getNormal(new Point3D(0, 3, -1)));
-
+		
+		  // =============== Boundary Values Tests ================== 
+		//Test in case that the vector p-p0 is normal to direction vector 
+		assertEquals("Bad normal to tube", new Vector(1,0,0), tb.getNormal(new Point3D(2,0,0)));
+		 
 	}
 
 }

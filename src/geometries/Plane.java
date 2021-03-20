@@ -23,7 +23,7 @@ public class Plane implements Geometry {
 	 */
 	public Plane(Point3D q0, Vector normal) {
 		this.q0 = q0;
-		this.normal = normal;
+		this.normal = normal.normalized();
 	}
 
 	/**

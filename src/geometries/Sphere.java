@@ -48,8 +48,10 @@ public class Sphere implements Geometry {
 
 	@Override
 	public Vector getNormal(Point3D point3d) {
+		if (point3d.equals(center))
+			throw new IllegalArgumentException("point cannot be the center of the sphere");
 		Vector vector = point3d.subtract(center);
-		return vector.normalized();
+		return vector.normalize();
 	}
 
 }
