@@ -4,6 +4,9 @@
 package unittests;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Test;
 
 import geometries.*;
@@ -86,10 +89,60 @@ public class PolygonTests {
     public void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here
-        Polygon pl = new Polygon(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0),
+        Polygon pl = new Polygon(new Point3D(0, 0, 1),
+        		new Point3D(1, 0, 0),
+        		new Point3D(0, 1, 0),
                 new Point3D(-1, 1, 1));
         double sqrt3 = Math.sqrt(1d / 3);
-        assertEquals("Bad normal to trinagle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
+        assertEquals("Bad normal to trinagle", 
+        		new Vector(sqrt3, sqrt3, sqrt3),
+        		pl.getNormal(new Point3D(0, 0, 1)));
+    }
+      
+        /**
+         * Test method for {@link geometries.Polygon#findIntersections(primitives.Point3D)}.
+         */
+        @Test
+        public void findIntersections() {
+             Polygon pl = new Polygon(
+                     new Point3D(2,0,0),
+                     new Point3D(1, 1, 0),
+                     new Point3D(3,2, 0),
+                     new Point3D(5, 1, 0));
+
+             // ============ Equivalence Partitions Tests ==============
+             //TC01: The point inside the polygon (1 point)
+             Point3D p1=new Point3D(2,1,0);
+             List<Point3D> result=pl.findIntersections(new Ray(
+                     new Point3D(2,1,1),new Vector(0,0,-1)));
+             assertEquals( "Wrong number of points",1, result.size());
+             assertEquals("Ray crosses polygon",List.of(p1), result);
+             //TC02: The point outside the polygon, against edge (0 points)
+             assertNull( "Ray not intersects the polygon",pl.findIntersections(new Ray(
+                             new Point3D(2, 2, 0),
+                             new Vector(0, 0, -1))));
+
+             //TC03: The point outside the polygon, against vertex (0 points)
+             assertNull("Ray not intersects the polygon",pl.findIntersections(new Ray(
+                             new Point3D(0.5, 1.0, 0),
+                             new Vector(0, 0, -1))));
+
+             // =============== Boundary Values Tests ==================
+             //TC04: The point on edge (0 points)
+             assertNull("Ray not intersects the polygon",pl.findIntersections(new Ray(
+                             new Point3D(1.5, 1.25, 1),
+                             new Vector(0, 0, -1))));
+             //TC05: The point in vertex (0 points)
+             assertNull("Ray not intersects the polygon",pl.findIntersections(new Ray(
+                             new Point3D(1, 1.0, 0),
+                             new Vector(0, 0, -1))));
+             //TC06: The point on edge's continuation (0 points)
+             assertNull("Ray not intersects the polygon",pl.findIntersections(new Ray(
+                             new Point3D(4, 3.0, 1),
+                             new Vector(0, 0, -1))));
+
+
+         
     }
 
 }

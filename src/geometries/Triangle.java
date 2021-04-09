@@ -1,6 +1,8 @@
 package geometries;
 
+
 import primitives.Point3D;
+
 
 /**
  * Triangle class represent a polygon with three vertices.

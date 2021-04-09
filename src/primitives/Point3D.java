@@ -62,7 +62,10 @@ public class Point3D {
 	 */
 	public Vector subtract(Point3D point3D) {
 
-		return new Vector(_x.coord - point3D._x.coord, _y.coord - point3D._y.coord, _z.coord - point3D._z.coord);
+		return new Vector(
+				_x.coord - point3D._x.coord,
+				_y.coord - point3D._y.coord,
+				_z.coord - point3D._z.coord);
 	}
 
 	/**
@@ -108,6 +111,11 @@ public class Point3D {
 	@Override
 	public String toString() {
 		return "(" + _x + ", " + _y + ", " + _z + ")";
+	}
+
+	public double getX() {
+		
+		return _x.coord;
 	}
 
 }

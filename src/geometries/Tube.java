@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Vector;
 import static primitives.Util.*;
 
+import java.util.List;
+
 /**
  * Tube class represent tube by radius and ray.
  * 
@@ -67,5 +69,11 @@ public class Tube implements Geometry {
 
 		Vector vector = point3d.subtract(O);
 		return vector.normalize();
+	}
+
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

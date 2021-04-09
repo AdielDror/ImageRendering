@@ -21,7 +21,7 @@ public class Ray {
     public Ray(Point3D p0, Vector dir) {
 		
 		this.p0 = p0;
-		this.dir = dir;
+		this.dir = dir.normalized();
 	}
 
    /**
@@ -55,5 +55,8 @@ public class Ray {
 	public String toString() {
 		return   p0 + ", " + dir;
 	}
-	
+
+	public Point3D getPoint(double t){
+        return p0.add(dir.scale(t));
+    }
 }
