@@ -63,7 +63,7 @@ public class Sphere implements Geometry {
 		List<Point3D> result = null;
 		Point3D P0 = ray.getP0();
 		Vector v = ray.getDir();
-
+        //P0==center
 		if (center.equals(P0)) {
 			
 			return List.of(ray.getPoint(radius));
