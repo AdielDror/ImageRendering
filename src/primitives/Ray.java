@@ -56,6 +56,12 @@ public class Ray {
 		return   p0 + ", " + dir;
 	}
 
+	/**
+	 * Calculate a point on the ray
+	 * 
+	 * @param t for the point
+	 * @return the point
+	 */
 	public Point3D getPoint(double t){
         return p0.add(dir.scale(t));
     }

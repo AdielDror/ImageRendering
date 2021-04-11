@@ -48,8 +48,8 @@ public class Geometries implements Intersectable {
 	public List<Point3D> findIntersections(Ray ray) {
 		List<Point3D> result = null;
 
-		// A loop that adds to the list all the bodies that have
-		// intersections with the ray
+		//A loop that adds to the list all the intersection points that the ray has with 
+		//all the geometric bodies
 		for (Intersectable item : _intersectableList) {
 			List<Point3D> elementList = item.findIntersections(ray);
 			if (elementList != null) {
