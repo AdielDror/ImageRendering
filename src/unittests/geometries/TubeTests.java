@@ -1,7 +1,7 @@
 /**
  * Tests for a Tube class
  */
-package unittests;
+package unittests.geometries;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

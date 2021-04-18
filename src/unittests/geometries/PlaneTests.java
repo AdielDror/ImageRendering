@@ -1,7 +1,7 @@
 /**
  *Tests for a Plane class 
  */
-package unittests;
+package unittests.geometries;
 
 import static org.junit.Assert.*;
 

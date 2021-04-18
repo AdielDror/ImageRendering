@@ -1,7 +1,7 @@
 /**
  * Tests for a Point3D class
  */
-package unittests;
+package unittests.primitives;
 
 import static org.junit.Assert.*;
 

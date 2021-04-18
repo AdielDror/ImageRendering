@@ -73,7 +73,7 @@ public class Camera {
 
 		this.vUp = vUp.normalized();
 		this.vTo = vTo.normalized();
-		this.vRight = this.vTo.crossProduct(this.vUp);
+		this.vRight = (this.vTo.crossProduct(this.vUp)).normalized();
 	}
 
 	/**

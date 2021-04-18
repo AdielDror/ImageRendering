@@ -1,7 +1,7 @@
 /**
  *Tests for a Vector class 
  */
-package unittests;
+package unittests.primitives;
 
 import static org.junit.Assert.*;
 
