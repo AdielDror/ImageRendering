@@ -44,7 +44,7 @@ public class Ray {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
         if (obj == null) return false;
-        if (!(obj instanceof Vector))
+        if (!(obj instanceof Ray))
             return false;
         Ray other = (Ray)obj;
 		return p0.equals(other.p0) && dir.equals(other.dir);

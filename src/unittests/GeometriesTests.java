@@ -29,7 +29,7 @@ public class GeometriesTests {
                 new Point3D(0, 1, 0),
                 new Point3D(0, 0, 1));
 
-        Sphere sphere = new Sphere(new Point3D(0, 6, 0), 2);
+        Sphere sphere = new Sphere(2, new Point3D(0, 6, 0));
         Triangle triangle = new Triangle(
                 new Point3D(1, 0, 0),
                 new Point3D(3, 2, 0),
@@ -58,7 +58,7 @@ public class GeometriesTests {
 
 
         //TC04: All shapes are intersected
-        sphere = new Sphere(new Point3D(3, 0, -3), 2);
+        sphere = new Sphere(2, new Point3D(3, 0, -3));
         geometries.add(sphere);
         intersections = geometries.findIntersections(ray);
         assertEquals("Some shapes are intersected",4, intersections.size());

@@ -21,10 +21,10 @@ public class Sphere implements Geometry {
 	/**
 	 * Sphere constructor receiving 2 values
 	 * 
-	 * @param center of the Sphere
 	 * @param radius of the Sphere
+	 * @param center of the Sphere
 	 */
-	public Sphere(Point3D center, double radius) {
+	public Sphere(double radius, Point3D center) {
 		this.center = center;
 		this.radius = radius;
 	}

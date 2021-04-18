@@ -26,7 +26,7 @@ public class SphereTests {
 	public void testGetNormal() {
 
 		// ============ Equivalence Partitions Tests ==============
-		Sphere sp = new Sphere(new Point3D(0, 0, 1), 1d);
+		Sphere sp = new Sphere(1d, new Point3D(0, 0, 1));
 		double sqrt2 = Math.sqrt(2);
 		// Standard normal test
 		assertEquals("Bad normal to sphere", new Vector(1 / sqrt2, 0, -1 / sqrt2),
@@ -39,7 +39,7 @@ public class SphereTests {
 	 */
 	@Test
 	public void testFindIntersections() {
-		Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
+		Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
 
 		// ============ Equivalence Partitions Tests ==============
 
