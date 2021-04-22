@@ -65,7 +65,8 @@ public class Point3DTests {
 		double sqrt1 = Math.sqrt(3);
 
 		// Test distance result is correct
-		assertEquals("ERROR: Distance of point does not work correctly", new Point3D(2, 3, 4).distance(p1), sqrt1,
+		assertEquals("ERROR: Distance of point does not work correctly", 
+				new Point3D(2, 3, 4).distance(p1), sqrt1,
 				0.0001);
 
 	}
