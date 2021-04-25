@@ -6,8 +6,9 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import scene.Scene;
+
 /**
- * The class inherits from the abstract class RayTracerBase 
+ * The class inherits from the abstract class RayTracerBase
  * 
  * @author Adiel
  *
@@ -15,7 +16,8 @@ import scene.Scene;
 public class RayTracerBasic extends RayTracerBase {
 
 	/**
-	 * RayTracerBasic constructor
+	 * RayTracerBasic constructor who gets a scene and runs the constructor of the
+	 * master class
 	 * 
 	 * @param scene
 	 */
@@ -37,12 +39,12 @@ public class RayTracerBasic extends RayTracerBase {
 	@Override
 	public Color traceRay(Ray ray) {
 		List<Point3D> intersections = scene.geometries.findIntersections(ray);
-		
-		//If no intersection points were found
-		if(intersections==null) {
+
+		// If no intersection points were found
+		if (intersections == null) {
 			return scene.background;
 		}
-		
+
 		Point3D closestPoint = ray.findClosestPoint(intersections);
 		return calcColor(closestPoint);
 	}

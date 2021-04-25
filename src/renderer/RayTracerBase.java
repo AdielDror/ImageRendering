@@ -24,7 +24,7 @@ public abstract class RayTracerBase {
 	}
 
 	/**
-	 * An abstract method for a color created from a particular ray
+	 * An abstract method for a color created from a particular ray to the 3D model of the scene
 	 * 
 	 * @param ray for the ray
 	 * @return The color painted by the ray

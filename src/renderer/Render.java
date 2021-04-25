@@ -21,25 +21,40 @@ public class Render {
 	private RayTracerBase rayTracer;
 
 	/**
-	 * 
+	 * Setter for imageWriter
 	 * @param imageWriter
-	 * @return
+	 * @return the object of render itself
 	 */
 	public Render setImageWriter(ImageWriter imageWriter) {
 		this.imageWriter = imageWriter;
 		return this;
 	}
 
+	/**
+	 * Setter for the scene
+	 * @param scene
+	 * @return the object of render itself
+	 */
 	public Render setScene(Scene scene) {
 		this.scene = scene;
 		return this;
 	}
 
+	/**
+	 * Setter for camera
+	 * @param camera
+	 * @return the object of render itself
+	 */
 	public Render setCamera(Camera camera) {
 		this.camera = camera;
 		return this;
 	}
 
+	/**
+	 * Setter for rayTracer
+	 * @param rayTracer for ray scanner
+	 * @return the object of render itself
+	 */
 	public Render setRayTracer(RayTracerBasic rayTracer) {
 		this.rayTracer = rayTracer;
 		return this;
@@ -104,8 +119,7 @@ public class Render {
 	}
 
 	/**
-	 * A function activates by delegating the appropriate function
-	 *  of an image maker
+	 * A function activates by delegating the appropriate function of an image maker
 	 */
 	public void writeToImage() {
 		if (imageWriter == null)

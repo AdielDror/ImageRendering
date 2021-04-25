@@ -10,6 +10,9 @@ import primitives.Color;
  */
 public class AmbientLight {
 
+	/**
+	 * Intensity of ambient light color
+	 */
 	final private Color _intensity;
 
 	/**
@@ -26,6 +29,8 @@ public class AmbientLight {
 	}
 
 	/**
+	 * Getter intensity color
+	 * 
 	 * @return the _intensity
 	 */
 	public Color getIntensity() {
