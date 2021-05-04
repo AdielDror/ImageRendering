@@ -7,6 +7,7 @@ import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
 
+
 /**
  * This class creates from the scene the color matrix of the image
  * 
@@ -86,7 +87,7 @@ public class Render {
 			for (int j = 0; j < nY; ++j) {
 				ray = camera.constructRayThroughPixel(nX, nY, j, i);
 				color = rayTracer.traceRay(ray);
-				imageWriter.writePixel(i, j, color);
+				imageWriter.writePixel(j, i, color);
 
 			}
 	}

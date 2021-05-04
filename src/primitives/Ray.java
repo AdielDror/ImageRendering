@@ -1,6 +1,7 @@
 package primitives;
 
 import java.util.List;
+import geometries.Intersectable.GeoPoint;
 
 /**
  * Class Ray is the class representing a set of points on a line that are on one
@@ -80,12 +81,12 @@ public class Ray {
 	public Point3D findClosestPoint(List<Point3D> points) {
 
 		Point3D result;
-		
-		//Check that the list is not empty
+
+		// Check that the list is not empty
 		if (points.size() > 0) {
 			result = points.get(0);
-			//A loop that goes through on the list 
-			//and checks what is the closest point to the beginning of the ray
+			// A loop that goes through on the list
+			// and checks what is the closest point to the beginning of the ray
 			for (Point3D other : points) {
 				if ((p0.distance(other)) < p0.distance(result)) {
 					result = other;
@@ -98,4 +99,33 @@ public class Ray {
 		return null;
 	}
 
+	/**
+	 * 
+	 * Finding the closest point and geometry to the p0 of the camera
+	 * 
+	 * @param intersections list of points and geometries, the function should find from this list
+	 * the closest point and geometry to p0 of the camera in the scene 
+	 * @return the closest point and geometry to the camera
+	 */
+	public GeoPoint getClosestGeoPoint(List<GeoPoint> intersections) {
+		GeoPoint result;
+
+		// Check that the list is not empty
+		if (intersections.size() > 0) {
+			result = intersections.get(0);
+			
+			// A loop that goes through on the list
+			// and checks what is the closest point to the beginning of the ray
+			for (GeoPoint other : intersections) {
+				if ((other.point.distance(p0)) < result.point.distance(p0)) {
+					result = other;
+
+				}
+			}
+			return result;
+		}
+
+		return null;
+
+	}
 }

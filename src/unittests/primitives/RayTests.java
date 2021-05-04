@@ -67,4 +67,10 @@ public class RayTests {
 		
 	}
 
+	
+	/**
+	 * Test method for {@link primitives.Ray#findClosestPoint(java.util.List)}.
+	 */
+	@Test
+	public void testGetClosestGeoPoint() {}
 }

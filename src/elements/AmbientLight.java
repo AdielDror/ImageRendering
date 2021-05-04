@@ -8,33 +8,20 @@ import primitives.Color;
  * @author Adiel
  *
  */
-public class AmbientLight {
-
-	/**
-	 * Intensity of ambient light color
-	 */
-	final private Color _intensity;
+public class AmbientLight extends Light {
 
 	/**
 	 * 
-	 * AmbientLight constructor calculates the final power of fill lighting stored in
-	 *  a field _intensity
-	 *  
-	 * @param iA for original fill light (light intensity according to RGB components)
+	 * AmbientLight constructor calculates the final power of fill lighting stored
+	 * in a field _intensity in superClass
+	 * 
+	 * @param iA for original fill light (light intensity according to RGB
+	 *           components)
 	 * @param kA for coefficient of attenuation of filler light
 	 */
 	public AmbientLight(Color iA, double kA) {
+		super(iA.scale(kA));
 
-		this._intensity = iA.scale(kA);
-	}
-
-	/**
-	 * Getter intensity color
-	 * 
-	 * @return the _intensity
-	 */
-	public Color getIntensity() {
-		return _intensity;
 	}
 
 }

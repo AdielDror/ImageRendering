@@ -5,7 +5,6 @@ package geometries;
 
 import primitives.Point3D;
 import primitives.Ray;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +26,7 @@ public class Geometries implements Intersectable {
 
 	/**
 	 * Constructor for the geometries
+	 * 
 	 * @param geometries for the intersections
 	 */
 	public Geometries(Intersectable... geometries) {
@@ -37,6 +37,7 @@ public class Geometries implements Intersectable {
 
 	/**
 	 * Adding to list
+	 * 
 	 * @param geometries
 	 */
 	public void add(Intersectable... geometries) {
@@ -44,21 +45,34 @@ public class Geometries implements Intersectable {
 
 	}
 
-	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		List<Point3D> result = null;
+	/*
+	 * @Override public List<Point3D> findIntersections(Ray ray) { List<Point3D>
+	 * result = null;
+	 * 
+	 * // A loop that adds to the list all the intersection points that the ray has
+	 * // with // all the geometric bodies for (Intersectable item :
+	 * _intersectableList) { List<Point3D> elementList =
+	 * item.findIntersections(ray); if (elementList != null) { if (result == null) {
+	 * result = new LinkedList<>(); } result.addAll(elementList); } } return result;
+	 * }
+	 */
 
-		//A loop that adds to the list all the intersection points that the ray has with 
-		//all the geometric bodies
-		for (Intersectable item : _intersectableList) {
-			List<Point3D> elementList = item.findIntersections(ray);
-			if (elementList != null) {
-				if (result == null) {
-					result = new LinkedList<>();
+	@Override
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+		List<GeoPoint> intersections = null;
+	
+		for (Intersectable geometry : _intersectableList ) {
+			var geoIntersectoions = geometry.findGeoIntersections(ray);
+			if (geoIntersectoions != null) {
+				if(intersections==null) {
+					intersections=new LinkedList<>(); 
+				
 				}
-				result.addAll(elementList);
+				intersections.addAll(geoIntersectoions);
 			}
 		}
-		return result;
+		return intersections;
 	}
+
+
 }
