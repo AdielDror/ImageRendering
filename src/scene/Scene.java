@@ -74,7 +74,9 @@ public class Scene {
 
 	
 	/**
-	 * @param lights the lights to set
+	 * Setter for lights
+	 * @param lights for the list of light sources
+	 * @return the object of the scene itself
 	 */
 	public Scene setLights(List<LightSource> lights) {
 		this.lights = lights;

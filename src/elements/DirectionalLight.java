@@ -4,6 +4,12 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+/**
+ * A class representing directional lighting
+ * 
+ * @author Adiel
+ *
+ */
 public class DirectionalLight extends Light implements LightSource {
 	
 	

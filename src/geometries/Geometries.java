@@ -45,22 +45,13 @@ public class Geometries implements Intersectable {
 
 	}
 
-	/*
-	 * @Override public List<Point3D> findIntersections(Ray ray) { List<Point3D>
-	 * result = null;
-	 * 
-	 * // A loop that adds to the list all the intersection points that the ray has
-	 * // with // all the geometric bodies for (Intersectable item :
-	 * _intersectableList) { List<Point3D> elementList =
-	 * item.findIntersections(ray); if (elementList != null) { if (result == null) {
-	 * result = new LinkedList<>(); } result.addAll(elementList); } } return result;
-	 * }
-	 */
+	
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		List<GeoPoint> intersections = null;
 	
+		//Go over all the geometries and find intersections with the ray
 		for (Intersectable geometry : _intersectableList ) {
 			var geoIntersectoions = geometry.findGeoIntersections(ray);
 			if (geoIntersectoions != null) {

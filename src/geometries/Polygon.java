@@ -86,32 +86,6 @@ public class Polygon extends Geometry {
 		return plane.getNormal();
 	}
 
-	/*
-	 * @Override public List<Point3D> findIntersections(Ray ray) { List<Point3D>
-	 * result = plane.findIntersections(ray);
-	 * 
-	 * // Check if intersect ray with the plane. if (result == null) { return null;
-	 * }
-	 * 
-	 * // Check if the intersection point with its plane is inside the polygon
-	 * Vector v = ray.getDir(); Point3D P0 = ray.getP0(); Vector v1 =
-	 * vertices.get(0).subtract(P0); Vector v2 = vertices.get(1).subtract(P0);
-	 * 
-	 * double t = alignZero(v.dotProduct(v1.crossProduct(v2).normalize())); if
-	 * (isZero(t)) { return null; }
-	 * 
-	 * boolean sign = t > 0; int size = vertices.size(); Vector vn =
-	 * vertices.get(size - 1).subtract(P0); t =
-	 * alignZero(v.dotProduct(vn.crossProduct(v1).normalize())); if (isZero(t) ||
-	 * sign ^ (t > 0)) { return null; }
-	 * 
-	 * // Check if all vertices have the same sign for (int i = 2; i < size; i++) {
-	 * v1 = v2; v2 = vertices.get(i).subtract(P0); t =
-	 * alignZero(v.dotProduct(v1.crossProduct(v2).normalize())); if (isZero(t) ||
-	 * sign ^ (t > 0)) { return null; }
-	 * 
-	 * } return result; }
-	 */
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		List<GeoPoint> result = plane.findGeoIntersections(ray);

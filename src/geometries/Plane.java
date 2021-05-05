@@ -72,51 +72,29 @@ public class Plane extends Geometry {
 	}
 
 	
-	/*
-	 * @Override public List<Point3D> findIntersections(Ray ray) { List<Point3D>
-	 * result = null;
-	 * 
-	 * //Check if q0=p0 if (q0.equals(ray.getP0())) { return null; }
-	 * 
-	 * double numerator = alignZero(normal.dotProduct(q0.subtract(ray.getP0())));
-	 * double denominator = alignZero(normal.dotProduct(ray.getDir()));
-	 * 
-	 * //Check if numerator or denominator equal zero if (isZero(numerator) ||
-	 * isZero(denominator)) { return null; }
-	 * 
-	 * double t = numerator / denominator; if (t < 0) { return result;//result=null
-	 * }
-	 * 
-	 * 
-	 * return List.of(ray.getPoint(t));
-	 * 
-	 * }
-	 */
-
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
-List<GeoPoint> result = null;
-		
-		//Check if q0=p0 
+		List<GeoPoint> result = null;
+
+		// Check if q0=p0
 		if (q0.equals(ray.getP0())) {
 			return null;
 		}
-		
+
 		double numerator = alignZero(normal.dotProduct(q0.subtract(ray.getP0())));
 		double denominator = alignZero(normal.dotProduct(ray.getDir()));
- 
-		//Check if numerator or denominator equal zero
+
+		// Check if numerator or denominator equal zero
 		if (isZero(numerator) || isZero(denominator)) {
 			return null;
 		}
-		
+
 		double t = numerator / denominator;
 		if (t < 0) {
-			return result;//result=null
+			return result;// result=null
 		}
 
-		
-		return List.of(new GeoPoint(this,ray.getPoint(t)));
+		return List.of(new GeoPoint(this, ray.getPoint(t)));
 
 	}
 

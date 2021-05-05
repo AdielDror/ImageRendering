@@ -6,6 +6,8 @@ package elements;
 import primitives.Color;
 
 /**
+ * An abstract class representing lighting
+ * 
  * @author Adiel
  * 
  */
@@ -15,7 +17,7 @@ import primitives.Color;
 
 	/**
 	 * Light constructor
-	 * @param intensity
+	 * @param intensity for the light intensity
 	 */
 	protected Light(Color intensity) {
 		this.intensity = intensity;

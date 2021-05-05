@@ -145,6 +145,57 @@ public class LightsTests {
 		render.writeToImage();
 	}
 
+	
+	/**
+	 * Produce a picture of a sphere lighted by a multiple light sources
+	 */
+	@Test
+	public void sphereMultiLights() {
+		scene1.geometries.add(sphere);
+
+		scene1.lights.add(new SpotLight(new Color(500, 300, 0), new Point3D(-50, -50, 50), new Vector(1, 1, -2), 1,
+				0.00001, 0.00000001));
+
+		scene1.lights.add(new SpotLight(new Color(0, 255, 0), new Point3D(0, -10, 0), new Vector(0, 1, 1), 1, 0.00001,
+				0.00000001));
+		scene1.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(70, 70, -50), 1, 0.001, 0.0001));
+		scene1.lights.add(new DirectionalLight(new Color(153, 0, 76), new Vector(5, 1, 0)));
+
+		ImageWriter imageWriter = new ImageWriter("sphereMultiLights", 500, 500);
+		Render render = new Render()//
+				.setImageWriter(imageWriter) //
+				.setScene(scene1) //
+				.setCamera(camera1) //
+				.setRayTracer(new RayTracerBasic(scene1));
+		render.renderImage();
+		render.writeToImage();
+	}
+
+	
+	
+	/**
+	 * Produce a picture of a two triangles lighted by a multiple light sources
+	 */
+	@Test
+	public void trianglesMultiLights() {
+		scene2.geometries.add(triangle1.setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(300)), //
+				triangle2.setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(300)));
+		scene2.lights.add(new PointLight(new Color(500, 250, 250), new Point3D(10, -10, -130), 1, 0.0005, 0.0005));
+		scene2.lights.add(new PointLight(new Color(0, 0, 250), new Point3D(-10, -10, -130), 1, 0.0005, 0.0005));
+		scene2.lights.add(new SpotLight(new Color(500, 250, 250), new Point3D(-40, 40, 130), new Vector(-2, 2, 1), 1,
+				0.0001, 0.000005));
+		scene2.lights.add(new DirectionalLight(new Color(50, 50, 50), new Vector(-20, 0, -1)));
+
+		ImageWriter imageWriter = new ImageWriter("trianglesMultiLights", 500, 500);
+		Render render = new Render()//
+				.setImageWriter(imageWriter) //
+				.setScene(scene2) //
+				.setCamera(camera2) //
+				.setRayTracer(new RayTracerBasic(scene2));
+		render.renderImage();
+		render.writeToImage();
+	}
+
 	/*	*//**
 			 * Produce a picture of a sphere lighted by a narrow spot light
 			 */

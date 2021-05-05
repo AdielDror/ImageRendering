@@ -99,7 +99,9 @@ public class RenderTests {
 	 * render.renderImage(); render.printGrid(100, new
 	 * Color(java.awt.Color.YELLOW)); render.writeToImage(); }
 	 */
-	  @Test
+
+
+	    @Test
 		public void basicRenderMultiColorTest() {
 			Scene scene = new Scene("Test scene")//
 					.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2)); //
