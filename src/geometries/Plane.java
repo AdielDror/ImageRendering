@@ -40,7 +40,7 @@ public class Plane extends Geometry {
 		Vector v1 = p2.subtract(p1);
 		Vector v2 = p3.subtract(p1);
 		Vector n = v1.crossProduct(v2);
-		this.normal = n.normalize();
+		this.normal = n.normalized();
 
 	}
 

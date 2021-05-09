@@ -21,12 +21,10 @@ public class SpotLight extends PointLight {
 	 * @param intensity for the lighting intensity
 	 * @param position for the lighting location
 	 * @param direction for the lighting direction
-	 * @param kC for the attenuation factor Kc 
-	 * @param kL for the attenuation factor kl 
-	 * @param kQ for the attenuation factor Kq 
+	 *
 	 */                                         
-	public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
-		super(intensity, position, kC, kL, kQ);
+	public SpotLight(Color intensity, Point3D position, Vector direction) {
+		super(intensity, position);
 		this.direction = direction.normalized();
 	}
 
@@ -45,6 +43,13 @@ public class SpotLight extends PointLight {
 
 		return super.getIntensity(p).scale(d);
 	}
-
+	
+	
+	/*
+	 * @Override public Vector getL(Point3D p) { return
+	 * p.subtract(direction.getHead()).normalize();
+	 * 
+	 * }
+	 */
 	
 }
