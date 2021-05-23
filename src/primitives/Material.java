@@ -21,6 +21,7 @@ public class Material {
 	 * Diffuse coefficient
 	 */
 	public double kD = 0.0;
+	
 	/**
 	 * specular coefficient
 	 */
@@ -64,8 +65,10 @@ public class Material {
 	}
 
 	/**
-	 * @param kT the kT to set
-	 * @return
+	 * Setter for kT
+	 * 
+	 * @param kT the kT to set for the transparency coefficient
+	 * @return the object itself
 	 */
 	public Material setkT(double kT) {
 		this.kT = kT;
@@ -73,8 +76,10 @@ public class Material {
 	}
 
 	/**
-	 * @param kR the kR to set
-	 * @return
+	 * Setter for kR
+	 * 
+	 * @param kR the kR to set for the reflection coefficient
+	 * @return the object itself
 	 */
 	public Material setkR(double kR) {
 		this.kR = kR;

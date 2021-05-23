@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import geometries.Intersectable.GeoPoint;
 import geometries.Plane;
 import primitives.*;
 
@@ -63,62 +64,76 @@ public class PlaneTests {
 	 */
 	@Test
 	public void testFindIntersections() {
-		Plane plane = new Plane(new Point3D(1, 0, 0),
-				new Point3D(0, 1, 0),
-				new Point3D(0, 0, 1));
-		
+		Plane plane = new Plane(new Point3D(1, 0, 0), new Point3D(0, 1, 0), new Point3D(0, 0, 1));
+
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Ray intersects the plane (1 point)
 		Point3D p1 = new Point3D(1, 0, 0);
-		List<Point3D> result = plane.findIntersections(new Ray(
-				new Point3D(-1, 0, 0),
-				new Vector(1, 0, 0)));
+		List<Point3D> result = plane.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(1, 0, 0)));
 		assertEquals("Result is wrong", 1, result.size());
 		assertEquals("Ray intersects the plane", List.of(p1), result);
 
 		// TC02: Ray does not intersect the plane (0 point)
 		assertNull("Ray not intersects the plane",
-				plane.findIntersections(new Ray(
-						new Point3D(-1, 0, 0),
-						new Vector(-1, -1, 0))));
+				plane.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(-1, -1, 0))));
 
 		// =============== Boundary Values Tests ==================
 
 		// **** Group: Ray is parallel to the plane
 		// TC03: The ray included in the plane
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(-1, 0, 0),
-				new Vector(1, -1, 0))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(1, -1, 0))));
 
 		// TC04: The ray not included in the plane
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(-1, 0, 0),
-				new Vector(-2, 0, 0))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(-2, 0, 0))));
 
 		// **** Group: Ray is orthogonal to the plane
 		// TC05: The point before the plane
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(-1, 0, 0), 
-				new Vector(0, -2, 0))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(-1, 0, 0), new Vector(0, -2, 0))));
 		// TC06: The point in the plane
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(0, 0, 1),
-				new Vector(1, 1, 1))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(0, 0, 1), new Vector(1, 1, 1))));
 		// TC07: The point after the plane
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(3, 2, 2),
-				new Vector(1, 1, 1))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(3, 2, 2), new Vector(1, 1, 1))));
 
 		// **** Group: Ray is neither orthogonal nor parallel to the plane
 		// TC08: The ray begins at the plane (p0 is in the plane, but not the ray)
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(1.5, 1.5, 0), 
-				new Vector(2, 2, -3))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(1.5, 1.5, 0), new Vector(2, 2, -3))));
 		// TC09: The ray begins in the same point which appears as reference point in
 		// the plane (Q)
-		assertNull("Ray not intersects the plane",plane.findIntersections(new Ray(
-				new Point3D(1, 0, 0),
-				new Vector(1, 1, -2))));
+		assertNull("Ray not intersects the plane",
+				plane.findIntersections(new Ray(new Point3D(1, 0, 0), new Vector(1, 1, -2))));
+	}
+
+	
+	/**
+	 * Test method for {@link geometries.Plane#findGeoIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+		Plane plane = new Plane(new Point3D(1, 0, 0), new Point3D(0, 1, 0), new Point3D(0, 0, 1));
+
+		// TC01: Ray intersects the plane (1 point)
+		// and the point in the range of the maximum distance (t-maxDistance)<0)
+		List<GeoPoint> result = plane.findGeoIntersections(new Ray(new Point3D(-1, 0, 0),
+				new Vector(1, 0, 0)), 3);
+		assertEquals("Result is wrong", 1, result.size());
+
+		// TC02: Ray intersects the plane (1 point)
+				// and the point in the range of the maximum distance (t-maxDistance)=0)
+		List<GeoPoint> result1 = plane.findGeoIntersections(new Ray(new Point3D(-1, 0, 0), 
+				new Vector(1, 0, 0)), 2);
+		assertEquals("Result is wrong", 1, result1.size());
+
+		// TC03: Ray intersects the plane,
+		// but the point is not in the range of the maximum distance (t-maxDistance)>0)
+		assertNull("Ray not intersects the plane",
+				plane.findGeoIntersections(new Ray(new Point3D(-1, 0, 0),
+						new Vector(1, 0, 0)), 1));
 	}
 }

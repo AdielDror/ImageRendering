@@ -86,22 +86,21 @@ public class Sphere extends Geometry {
 		if (t1 < 0 && t2 < 0) {
 			return null;
 		}
-		
 
-		if (t1 > 0 && t2 > 0) {
-			if (alignZero(maxDistance - t1) >= 0 && alignZero(maxDistance - t2) >= 0) {
+		// if both t1 and t2 grater than 0 that mean we have 2 intersection points
+		//and check if the points is farther from the front of the beam than the maximum distance
+		if (t1 > 0 && t2 > 0 && alignZero(maxDistance - t1) >= 0 && alignZero(maxDistance - t2) >= 0)
+		{
 
-				return List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
+			return List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
 
-			}
-		
+		}
 
 		else if (t1 > 0 && alignZero(maxDistance - t1) > 0) {
 			return List.of(new GeoPoint(this, ray.getPoint(t1)));
 
 		} else if (t2 > 0 && alignZero(maxDistance - t2) > 0) {
 			return List.of(new GeoPoint(this, ray.getPoint(t2)));
-		}
 		}
 		return result;
 	}

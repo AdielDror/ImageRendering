@@ -94,6 +94,7 @@ public class Plane extends Geometry {
 			return result;// result=null
 		}
 		
+		//Check if the point is farther from the head of the ray than the maximum distance
 		if (alignZero(t-maxDistance)<=0) {
 			
 			return List.of(new GeoPoint(this, ray.getPoint(t)));
