@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.Test;
 import geometries.Intersectable.GeoPoint;
-import geometries.Sphere;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;

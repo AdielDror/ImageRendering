@@ -113,6 +113,10 @@ public class Point3D {
 		return "(" + _x + ", " + _y + ", " + _z + ")";
 	}
 
+	/**
+	 * Getter for coordinate x
+	 * @return coordinate x
+	 */
 	public double getX() {
 		
 		return _x.coord;

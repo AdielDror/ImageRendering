@@ -5,8 +5,6 @@ import java.util.MissingResourceException;
 import elements.Camera;
 import primitives.Color;
 import primitives.Ray;
-import scene.Scene;
-
 
 /**
  * This class creates from the scene the color matrix of the image
@@ -16,13 +14,13 @@ import scene.Scene;
  */
 public class Render {
 
-	private Scene scene;
 	private Camera camera;
 	private ImageWriter imageWriter;
 	private RayTracerBase rayTracer;
 
 	/**
 	 * Setter for imageWriter
+	 * 
 	 * @param imageWriter
 	 * @return the object of render itself
 	 */
@@ -33,16 +31,16 @@ public class Render {
 
 	/**
 	 * Setter for the scene
+	 * 
 	 * @param scene
 	 * @return the object of render itself
-	 */
-	public Render setScene(Scene scene) {
-		this.scene = scene;
-		return this;
-	}
+	 *//*
+		 * public Render setScene(Scene scene) { this.scene = scene; return this; }
+		 */
 
 	/**
 	 * Setter for camera
+	 * 
 	 * @param camera
 	 * @return the object of render itself
 	 */
@@ -53,6 +51,7 @@ public class Render {
 
 	/**
 	 * Setter for rayTracer
+	 * 
 	 * @param rayTracer for ray scanner
 	 * @return the object of render itself
 	 */
@@ -68,8 +67,7 @@ public class Render {
 	 * 
 	 */
 	public void renderImage() {
-		if (scene == null)
-			throw new MissingResourceException("Empty value", "Render", "scene");
+		
 		if (camera == null)
 			throw new MissingResourceException("Empty value", "Render", "camera");
 		if (imageWriter == null)

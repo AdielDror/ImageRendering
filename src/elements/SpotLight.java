@@ -45,11 +45,5 @@ public class SpotLight extends PointLight {
 	}
 	
 	
-	/*
-	 * @Override public Vector getL(Point3D p) { return
-	 * p.subtract(direction.getHead()).normalize();
-	 * 
-	 * }
-	 */
 	
 }

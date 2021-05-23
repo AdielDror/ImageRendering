@@ -1,7 +1,9 @@
 package primitives;
 
 import java.util.List;
+
 import geometries.Intersectable.GeoPoint;
+import static primitives.Util.*;
 
 /**
  * Class Ray is the class representing a set of points on a line that are on one
@@ -12,8 +14,29 @@ import geometries.Intersectable.GeoPoint;
  */
 public class Ray {
 
-	final Point3D p0;
-	final Vector dir;
+	/**
+	 * Fixed for first moving magnitude rays for shading rays
+	 */
+	private static final double DELTA = 0.1;
+
+	private Point3D p0;
+	private Vector dir;
+
+	/**
+	 * Ray constructor receiving Point and direction and normal
+	 * 
+	 * @param head for the moving the ray head point by DELTA in direction of the secondary ray
+	 * @param direction value for direction Vector
+	 * @param normal for the normal vector
+	 */
+	public Ray(Point3D head, Vector direction, Vector normal) {
+		double dn = alignZero(direction.dotProduct(normal));
+
+		this.p0 = head.add(normal.scale(dn > 0 ? DELTA : -DELTA));
+
+		this.dir = direction.normalized();
+
+	}
 
 	/**
 	 * Ray constructor receiving Point and direction
@@ -69,7 +92,14 @@ public class Ray {
 	 */
 	public Point3D getPoint(double t) {
 
-		return p0.add(dir.scale(t));
+		try {
+			if (isZero(t))
+				return p0;
+			return p0.add(dir.scale(t));
+		} catch (IllegalArgumentException e) {
+			return p0;
+		}
+
 	}
 
 	/**
@@ -103,8 +133,9 @@ public class Ray {
 	 * 
 	 * Finding the closest point and geometry to the p0 of the camera
 	 * 
-	 * @param intersections list of points and geometries, the function should find from this list
-	 * the closest point and geometry to p0 of the camera in the scene 
+	 * @param intersections list of points and geometries, the function should find
+	 *                      from this list the closest point and geometry to p0 of
+	 *                      the camera in the scene
 	 * @return the closest point and geometry to the camera
 	 */
 	public GeoPoint getClosestGeoPoint(List<GeoPoint> intersections) {
@@ -113,7 +144,7 @@ public class Ray {
 		// Check that the list is not empty
 		if (intersections.size() > 0) {
 			result = intersections.get(0);
-			
+
 			// A loop that goes through on the list
 			// and checks what is the closest point to the beginning of the ray
 			for (GeoPoint other : intersections) {

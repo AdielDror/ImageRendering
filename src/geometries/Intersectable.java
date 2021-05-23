@@ -57,9 +57,10 @@ public interface Intersectable {
 	 * Find all intersection points from the ray with the geometry
 	 * 
 	 * @param ray the famous Ray pointing to
+	 * @param maxDistance for upper boundary of distance from the ray head to the intersection point
 	 * @return list of intersection points
 	 */
-	List<GeoPoint> findGeoIntersections(Ray ray);
+	List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 
 	/**
 	 * Find all intersection points from the ray
@@ -71,4 +72,9 @@ public interface Intersectable {
 		var geoList = findGeoIntersections(ray);
 		return geoList == null ? null : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
 	}
+	
+	default List<GeoPoint> findGeoIntersections(Ray ray) {
+    	return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
+}
+
 }
