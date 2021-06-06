@@ -1,5 +1,6 @@
 package renderer;
 
+import geometries.Geometry;
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
 import primitives.Material;
@@ -9,7 +10,11 @@ import primitives.Vector;
 import scene.Scene;
 import static primitives.Util.*;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import elements.LightSource;
 
@@ -21,7 +26,7 @@ import elements.LightSource;
  */
 public class RayTracerBasic extends RayTracerBase {
 	private static final double INITIAL_K = 1.0;
-	
+
 	/**
 	 * Fixed for transparency / reflection recursion stop conditions
 	 */
@@ -41,7 +46,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
-		
+
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 
@@ -73,12 +78,16 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);// Vector from the light source to the point
 			double nl = alignZero(n.dotProduct(l));
 			if (nl * nv > 0) {// sign(nl)==sign(nv)
-				double ktr = transparency(lightSource, l, n, intersection);
+				// double ktr = transparency(lightSource, l, n, intersection);
+
+				
+                //Use the function for the improvement of soft shadows
+				double ktr = softShadows(lightSource, l, n, intersection);
+
 				if (ktr * k > MIN_CALC_COLOR_K) {
 
 					// The intensity of the light source at a certain point
-					Color lightIntensity = lightSource.getIntensity(intersection.point)
-							.scale(ktr);
+					Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);
 
 					color = color.add(calcDiffusive(kd, l, n, lightIntensity),
 							calcSpecular(ks, l, n, v, nShininess, lightIntensity));
@@ -125,31 +134,8 @@ public class RayTracerBasic extends RayTracerBase {
 
 	}
 
-	/**
-	 * The function checks for shading between a point and the light source
-	 * 
-	 * @param light    for light source
-	 * @param l        for vector from light to the point
-	 * @param n        for vector normal
-	 * @param geopoint geometry and point
-	 * @return true if there is no shading, otherwise false
-	 */
-	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
-		Vector lightDirection = l.scale(-1); // from point to light source
 
-		Ray lightRay = new Ray(geopoint.point, lightDirection, n);// refactored ray head move
-
-		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
-		if (intersections == null)
-			return true;
-		double lightDistance = alignZero(light.getDistance(geopoint.point));
-		for (GeoPoint gp : intersections) {
-			if (lightDistance >= alignZero(gp.point.distance(geopoint.point)) && gp.geometry.getMaterial().kT == 0)
-				return false;
-		}
-		return true;
-	}
-
+	
 	/**
 	 * This function return the closest intersection point with the ray. If there is
 	 * no intersection it returns null
@@ -176,8 +162,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the color
 	 */
 	private Color calcColor(GeoPoint gp, Ray ray) {
-		return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
-				.add(scene.ambientLight.getIntensity());
+		return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
 	}
 
 	/**
@@ -241,28 +226,26 @@ public class RayTracerBasic extends RayTracerBase {
 	/**
 	 * This function construct ray that is a reflaction from Camera direction
 	 * 
-	 * @param n for normal of the hit
+	 * @param n     for normal of the hit
 	 * @param point the actual point
-	 * @param ray the ray from light source
+	 * @param ray   the ray from light source
 	 * @return reflection ray
 	 */
 	private Ray constructReflectedRay(Vector n, Point3D point, Ray ray) {
 		Vector v = ray.getDir();
 		Vector r = v.add(n.scale(-2 * alignZero(v.dotProduct(n))));
 		Ray lightRay = new Ray(point, r, n);
-		
 
 		return lightRay;
 	}
 
-	
 	/**
 	 * This function construct the refracted ray from the intersection point in the
 	 * same direction of camera
 	 * 
-	 * @param n for the normal of the hit 
+	 * @param n     for the normal of the hit
 	 * @param point the actual point
-	 * @param ray the from light source 
+	 * @param ray   the from light source
 	 * @return refracted ray
 	 */
 	private Ray constructRefractedRay(Vector n, Point3D point, Ray ray) {
@@ -276,9 +259,9 @@ public class RayTracerBasic extends RayTracerBase {
 	 * This function calculate the amount of shadow in the point, sometimes we need
 	 * light shadow and sometimes not
 	 * 
-	 * @param ls for the light source
-	 * @param l for direction from the light source
-	 * @param n the normal vector
+	 * @param ls       for the light source
+	 * @param l        for direction from the light source
+	 * @param n        the normal vector
 	 * @param geopoint the point we want to check the shadow
 	 * @return the amount of the shadow
 	 */
@@ -301,5 +284,75 @@ public class RayTracerBasic extends RayTracerBase {
 		}
 		return ktr;
 	}
+
+
+
+	
+
+	/**
+	 * The function calculates the shading coefficient for enhancing soft shadows
+	 * 
+	 * @param ls for light source
+	 * @param l for vector from light source to the point
+	 * @param n the normal
+	 * @param geopoint for the geometry and point
+	 * @return average shading coefficient
+	 */
+	private double softShadows(LightSource ls, Vector l, Vector n, GeoPoint geopoint) {
+
+		double sumKtr = 0;
+		Vector lightDirection = l.scale(-1);
+		double radius = ls.getRadius();
+
+		Ray lightRay = new Ray(geopoint.point, l, n);
+		double dis = ls.getDistance(geopoint.point);
+		int numOfRays = ls.getNumOfRays();
+		//Produces a list of rays
+		List<Ray> rays = lightRay.generateBeam(lightDirection, radius, dis, numOfRays);
+		
+		//Calculate the shading coefficient for each beam in the list
+		for (Ray ray : rays) {
+			sumKtr += transparency(ls, ray.getDir(), n, geopoint);
+		}
+
+		int size = rays.size();
+		return size > 1 ? (sumKtr / size) : sumKtr;
+		
+
+	}
+
+	
+	
+	/*private Map<Geometry, List<Point3D>> getSceneRayIntersections(Ray ray) {
+		Iterator<Geometry> geometries = scene.getGeometriesIterator();
+		Map<Geometry, List<Point3D>> intersectionPoints = new HashMap<Geometry, List<Point3D>>();
+		while (geometries.hasNext()) {
+			Geometry geometry = geometries.next();
+			List<Point3D> geometryIntersectionPoints = geometry.findIntersections(ray);
+			if (!geometryIntersectionPoints.isEmpty())
+				intersectionPoints.put(geometry, geometryIntersectionPoints);
+		}
+		return intersectionPoints;
+	}
+
+	private Entry<Geometry, Point3D> findClosesntIntersection(Ray ray) {
+
+		Map<Geometry, List<Point3D>> intersectionPoints = getSceneRayIntersections(ray);
+
+		if (intersectionPoints.size() == 0)
+			return null;
+
+		Map<Geometry, Point3D> closestPoint = getClosestPoint(intersectionPoints);
+		Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
+		return entry;
+
+	}
+
+	private Map<Geometry, Point3D> getClosestPoint(Map<Geometry, List<Point3D>> intersectionPoints) {
+		// TODO Auto-generated method stub
+		double distance = Double.MAX_VALUE;
+
+		return null;
+	}*/
 
 }

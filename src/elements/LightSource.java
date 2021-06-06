@@ -35,4 +35,18 @@ public interface LightSource {
 	 * @return the distance
 	 */
 	double getDistance(Point3D point);
+	
+	/**
+	 * Get the number of rays to calculate
+	 * 
+	 * @return the number of rays
+	 */
+	public int getNumOfRays(); 
+	
+	/**
+	 * Get the radius for light source
+	 * 
+	 * @return the radius
+	 */
+	public double getRadius();
 }

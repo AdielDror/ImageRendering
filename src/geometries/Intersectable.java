@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
  *
  *         Interface for intersection points
  */
-public interface Intersectable {
+public abstract class Intersectable {
+	protected Point3D minBoundary;
+	protected Point3D maxBoundary;
 
 	/**
 	 * Static Internal Auxiliary Class (PDS) that is a tuple of references to a
@@ -62,7 +64,7 @@ public interface Intersectable {
 	 * to the intersection point
 	 * @return list of intersection points
 	 */
-	List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
+	abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 
 	/**
 	 * Find all intersection points from the ray
@@ -70,7 +72,7 @@ public interface Intersectable {
 	 * @param ray the famous Ray pointing to
 	 * @return intersection points
 	 */
-	default List<Point3D> findIntersections(Ray ray) {
+	 public List<Point3D> findIntersections(Ray ray) {
 		var geoList = findGeoIntersections(ray);
 		return geoList == null ? null : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
 	}
@@ -82,8 +84,28 @@ public interface Intersectable {
 	 * @param ray the ray intersects
 	 * @return calling the function of finding intersection points with a default parameter
 	 */
-	default List<GeoPoint> findGeoIntersections(Ray ray) {
+	  public List<GeoPoint> findGeoIntersections(Ray ray) {
     	return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
 }
+	 
+	 protected abstract void setMaxCoordinates();
+	 protected abstract void setMinCoordinates();
+
+	/**
+	 * @return the minBoundary
+	 */
+	public Point3D getMinBoundary() {
+		return minBoundary;
+	}
+
+	/**
+	 * @return the maxBoundary
+	 */
+	public Point3D getMaxBoundary() {
+		return maxBoundary;
+	}
+	 
+	 
+	 
 
 }

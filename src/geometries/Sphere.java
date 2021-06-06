@@ -27,6 +27,8 @@ public class Sphere extends Geometry {
 	public Sphere(double radius, Point3D center) {
 		this.center = center;
 		this.radius = radius;
+		setMaxCoordinates();
+		setMinCoordinates();
 	}
 
 	/**
@@ -103,6 +105,27 @@ public class Sphere extends Geometry {
 			return List.of(new GeoPoint(this, ray.getPoint(t2)));
 		}
 		return result;
+	}
+
+	@Override
+	public void setMaxCoordinates() {
+		
+
+		// TODO Auto-generated method stub
+		double x = center.getX()+ radius;
+		double y = center.getY() +radius;
+		double z = center.getZ() + radius;
+		maxBoundary = new Point3D(x, y, z);
+		
+	}
+
+	@Override
+	public void setMinCoordinates() {
+		// TODO Auto-generated method stub
+		double x = center.getX()- radius;
+		double y = center.getY()-radius;
+		double z = center.getZ() - radius;
+		minBoundary = new Point3D(x, y, z);
 	}
 
 }

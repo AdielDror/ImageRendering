@@ -13,7 +13,7 @@ import geometries.Intersectable.GeoPoint;
 import geometries.Sphere;
 import primitives.*;
 import static primitives.Point3D.ZERO;
-import static primitives.Util.alignZero;
+
 
 /**
  * @author Adiel

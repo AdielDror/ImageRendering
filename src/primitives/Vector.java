@@ -192,4 +192,15 @@ public class Vector {
 	public String toString() {
 		return "" + _head;
 	}
+
+	/**
+	 * A function creates a vertical vector from a given vector
+	 * 
+	 * @return normalized vector
+	 */
+	public Vector craeteNormal() {
+		
+		double x = _head._x.coord, z = _head._z.coord;
+			return new Vector(-z, 0, x).normalize();
+	}
 }

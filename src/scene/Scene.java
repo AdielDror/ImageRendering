@@ -1,12 +1,14 @@
 package scene;
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import elements.AmbientLight;
 import elements.LightSource;
 import geometries.Geometries;
+import geometries.Geometry;
 import primitives.Color;
 
 /**
@@ -84,7 +86,9 @@ public class Scene {
 	}
 	
 	
-	
-	
+	/*
+	 * public Iterator<Geometry>getGeometriesIterator() { return
+	 * geometries.iterator(); }
+	 */
 	
 }

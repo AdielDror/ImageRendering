@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.Test;
 
 import geometries.*;
-import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**

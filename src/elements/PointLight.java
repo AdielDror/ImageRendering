@@ -17,6 +17,9 @@ public class PointLight extends Light implements LightSource {
 	private double kL = 0;
 	private double kQ = 0;
 
+	private double radius=0;
+	private int numOfRays=0;
+	
 	/**
 	 * PointLight constructor that initializes all the fields
 	 * 
@@ -24,7 +27,7 @@ public class PointLight extends Light implements LightSource {
 	 * @param position  for the position
 	 *
 	 */
-	public PointLight(Color intensity, Point3D position) {
+ 	public PointLight(Color intensity, Point3D position) {
 		super(intensity);
 		this.position = position;
 
@@ -59,8 +62,17 @@ public class PointLight extends Light implements LightSource {
 		return this;
 	}
 
+	public PointLight setRadius(double radius) {
+		this.radius=radius;
+		return this;
+	}
+	
+	public PointLight setNumOfRays(int numOfRays) {
+		this.numOfRays=numOfRays;
+		return this;
+	}
 	@Override
-	public Color getIntensity(Point3D p) {
+ 	public Color getIntensity(Point3D p) {
 
 		return getIntensity().reduce(kC + kL * p.distance(position) + kQ * p.distanceSquared(position));
 	}
@@ -76,5 +88,18 @@ public class PointLight extends Light implements LightSource {
    
 		return position.distance(point);
 	}
+
+	@Override
+	public int getNumOfRays() {
+		return numOfRays;
+	}
+	
+	@Override
+	public double getRadius() {
+		
+		return radius;
+	}
+	
+	
 
 }

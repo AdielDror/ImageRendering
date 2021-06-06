@@ -122,4 +122,14 @@ public class Point3D {
 		return _x.coord;
 	}
 
+	public double getY() {
+		// TODO Auto-generated method stub
+		return _y.coord;
+	}
+
+	public double getZ() {
+		// TODO Auto-generated method stub
+		return _z.coord;
+	}
+
 }

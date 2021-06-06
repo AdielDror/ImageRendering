@@ -162,7 +162,7 @@ public class ShadowTests {
 		);
 		scene.lights.add( //
 				new SpotLight(new Color(400, 240, 0), new Point3D(-74, -74, 60), new Vector(1, 1, -3)) //
-						.setkL(1E-5).setkQ(1.5E-7));
+						.setkL(1E-5).setkQ(1.5E-7).setRadius(5));
 
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleInitial4", 400, 400)) //

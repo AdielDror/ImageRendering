@@ -1,7 +1,7 @@
 package primitives;
 
+import java.util.LinkedList;
 import java.util.List;
-
 import geometries.Intersectable.GeoPoint;
 import static primitives.Util.*;
 
@@ -21,7 +21,7 @@ public class Ray {
 
 	private Point3D p0;
 	private Vector dir;
-
+	
 	/**
 	 * Ray constructor receiving Point and direction and normal
 	 * 
@@ -159,4 +159,52 @@ public class Ray {
 		return null;
 
 	}
+
+	
+	/**
+	 * The function creates a beam of rays
+	 * 
+	 * @param n for the normal
+	 * @param radius of the circuit
+	 * @param distance of the point on the body from the center of the circle
+	 * @param numOfRays the amount of rays we produce
+	 * @return list of rays
+	 */
+	public List<Ray> generateBeam(Vector n, double radius, double distance, int numOfRays) {
+		List<Ray> rays=new LinkedList<Ray>();
+		rays.add(this);
+		if(numOfRays==1 || isZero(radius))
+			return rays;
+		Vector nX=dir.craeteNormal();
+		Vector nY=dir.crossProduct(nX);
+		
+		Point3D centerCircle=this.getPoint(distance);
+		Point3D randomPoint;
+		double x,y,d;
+		double nv=alignZero(n.dotProduct(getDir()));
+		//A loop that produces rays using random dots
+		for(int i=0; i<numOfRays; i++) {
+			x = random(-1,1);
+			y=Math.sqrt(1-x*x);
+			d=random(-radius, radius);
+			x=alignZero(x*d);
+			y=alignZero(y*d);
+			randomPoint=centerCircle;
+			if(x!=0)
+				randomPoint=randomPoint.add(nX.scale(x));
+			if(y!=0)
+				randomPoint=randomPoint.add(nY.scale(y));
+			
+			Vector tPoint=randomPoint.subtract(p0);
+			double nt=alignZero(n.dotProduct(tPoint));
+			if(nv*nt>0) {
+				rays.add(new Ray(p0,tPoint));
+			}
+		}
+		
+		return rays;
+	}
+	
+	
+	
 }

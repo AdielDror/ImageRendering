@@ -41,6 +41,8 @@ public class Plane extends Geometry {
 		Vector v2 = p3.subtract(p1);
 		Vector n = v1.crossProduct(v2);
 		this.normal = n.normalized();
+		setMaxCoordinates();
+		setMinCoordinates();
 
 	}
 
@@ -102,6 +104,22 @@ public class Plane extends Geometry {
 
 		return null;
 
+	}
+
+	@Override
+	protected void setMaxCoordinates() {
+		// TODO Auto-generated method stub
+		double x = Double.POSITIVE_INFINITY, y = x, z = y;
+		maxBoundary = new Point3D(x, y, z);
+		
+	}
+
+	@Override
+	protected void setMinCoordinates() {
+		// TODO Auto-generated method stub
+		double x = Double.NEGATIVE_INFINITY, y = x, z = y;
+		minBoundary = new Point3D(x, y, z);
+		
 	}
 
 }

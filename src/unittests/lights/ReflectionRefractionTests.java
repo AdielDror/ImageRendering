@@ -3,13 +3,10 @@
  */
 package unittests.lights;
 
-import java.util.List;
 
 import org.junit.Test;
 
 import elements.*;
-import geometries.Plane;
-import geometries.Polygon;
 import geometries.Sphere;
 import geometries.Triangle;
 import primitives.*;
@@ -112,7 +109,7 @@ public class ReflectionRefractionTests {
 						.setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setkT(0.6)));
 
 		scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1)) //
-				.setkL(4E-5).setkQ(2E-7));
+				.setkL(4E-5).setkQ(2E-7).setRadius(5));
 
 		ImageWriter imageWriter = new ImageWriter("refractionShadow", 600, 600);
 		Render render = new Render() //
@@ -124,6 +121,10 @@ public class ReflectionRefractionTests {
 		render.writeToImage();
 	}
 
+	
+	/**
+	 * Produce a picture with some elements
+	 */
 	@Test
 	public void ourTest() {
 
