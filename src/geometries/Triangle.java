@@ -11,7 +11,7 @@ import primitives.Point3D;
  *
  */
 public class Triangle extends Polygon {
-
+	
 	/**
 	 * Triangle constructor receiving a list
 	 * 

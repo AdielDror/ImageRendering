@@ -11,7 +11,6 @@ import static primitives.Util.*;
  * @author Dan
  */
 public class Polygon extends Geometry {
-	private static final double DELTA = 0.1;
 	
 	/**
 	 * List of polygon's vertices
@@ -51,9 +50,11 @@ public class Polygon extends Geometry {
 		// polygon with this plane.
 		// The plane holds the invariant normal (orthogonal unit) vector to the polygon
 		plane = new Plane(vertices[0], vertices[1], vertices[2]);
-		if (vertices.length == 3)
+		if (vertices.length == 3) {
+			setMaxCoordinates();
+		setMinCoordinates();
 			return; // no need for more tests for a Triangle
-
+		}
 		Vector n = plane.getNormal();
 
 		// Subtracting any subsequent points will throw an IllegalArgumentException
@@ -132,16 +133,16 @@ public class Polygon extends Geometry {
 	}
 
 	@Override
-	protected void setMaxCoordinates() {
-		// TODO Auto-generated method stub
+	public void setMaxCoordinates() {
+		
 		double maxX = Double.NEGATIVE_INFINITY;
 		double maxY = Double.NEGATIVE_INFINITY;
 		double maxZ = Double.NEGATIVE_INFINITY;
 		double x, y, z;
 		for (Point3D p : vertices) {
-			x = p.getX();
-			y = p.getY();
-			z = p.getZ();
+			x = p._x.coord;
+			y = p._y.coord;
+			z = p._z.coord;
 			if (x > maxX)
 				maxX = x;
 			if (y > maxY)
@@ -149,22 +150,22 @@ public class Polygon extends Geometry {
 			if (z > maxZ)
 				maxZ = z;
 		}
-		maxBoundary = new Point3D(maxX + DELTA, maxY + DELTA, maxZ + DELTA);
+		maxBoundary = new Point3D(maxX, maxY, maxZ);
 	}
 		
 
 
 	@Override
-	protected void setMinCoordinates() {
-		// TODO Auto-generated method stub
+	public void setMinCoordinates() {
+		
 		double minX = Double.POSITIVE_INFINITY;
 		double minY = Double.POSITIVE_INFINITY;
 		double minZ = Double.POSITIVE_INFINITY;
 		double x, y, z;
 		for (Point3D p : vertices) {
-			x = p.getX();
-			y = p.getY();
-			z = p.getZ();
+			x = p._x.coord;
+			y = p._y.coord;
+			z = p._z.coord;
 			if (x < minX)
 				minX = x;
 			if (y < minY)
@@ -172,7 +173,7 @@ public class Polygon extends Geometry {
 			if (z < minZ)
 				minZ = z;
 		}
-		minBoundary = new Point3D(minX - DELTA, minY - DELTA, minZ - DELTA);
+		minBoundary = new Point3D(minX, minY, minZ);
 		
 	}
 }

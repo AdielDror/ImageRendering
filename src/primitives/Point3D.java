@@ -7,9 +7,9 @@ package primitives;
  *
  */
 public class Point3D {
-	final Coordinate _x;
-	final Coordinate _y;
-	final Coordinate _z;
+	public Coordinate _x;
+	public Coordinate _y;
+	public Coordinate _z;
 
 	/**
 	 * Static constant containing a point(0,0,0)
@@ -122,14 +122,6 @@ public class Point3D {
 		return _x.coord;
 	}
 
-	public double getY() {
-		// TODO Auto-generated method stub
-		return _y.coord;
-	}
-
-	public double getZ() {
-		// TODO Auto-generated method stub
-		return _z.coord;
-	}
+	
 
 }

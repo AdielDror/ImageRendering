@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
  *         Interface for intersection points
  */
 public abstract class Intersectable {
-	protected Point3D minBoundary;
-	protected Point3D maxBoundary;
+	public Point3D maxBoundary = new Point3D(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
+			Double.NEGATIVE_INFINITY);
+	public Point3D minBoundary = new Point3D(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
+			Double.POSITIVE_INFINITY);
 
 	/**
 	 * Static Internal Auxiliary Class (PDS) that is a tuple of references to a
@@ -56,12 +58,12 @@ public abstract class Intersectable {
 	}
 
 	/**
-	 * The function finds intersection points with the beam within 
-	 * the range of the maximum distance
+	 * The function finds intersection points with the beam within the range of the
+	 * maximum distance
 	 * 
-	 * @param ray the famous Ray pointing to
-	 * @param maxDistance for upper boundary of distance from the ray head 
-	 * to the intersection point
+	 * @param ray         the famous Ray pointing to
+	 * @param maxDistance for upper boundary of distance from the ray head to the
+	 *                    intersection point
 	 * @return list of intersection points
 	 */
 	abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
@@ -72,40 +74,32 @@ public abstract class Intersectable {
 	 * @param ray the famous Ray pointing to
 	 * @return intersection points
 	 */
-	 public List<Point3D> findIntersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		var geoList = findGeoIntersections(ray);
 		return geoList == null ? null : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
 	}
-	
-	
+
 	/**
 	 * A default function for finding GeoPoint's intersection points with a beam
 	 * 
 	 * @param ray the ray intersects
-	 * @return calling the function of finding intersection points with a default parameter
+	 * @return calling the function of finding intersection points with a default
+	 *         parameter
 	 */
-	  public List<GeoPoint> findGeoIntersections(Ray ray) {
-    	return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
-}
-	 
-	 protected abstract void setMaxCoordinates();
-	 protected abstract void setMinCoordinates();
-
-	/**
-	 * @return the minBoundary
-	 */
-	public Point3D getMinBoundary() {
-		return minBoundary;
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+		return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
 	}
 
 	/**
-	 * @return the maxBoundary
+	 * Abstract function for the coordinate values of the maximum point of the geometry
 	 */
-	public Point3D getMaxBoundary() {
-		return maxBoundary;
-	}
-	 
-	 
-	 
+	public abstract void setMaxCoordinates();
+
+	/**
+	 * Abstract function for the coordinate values of the minimum point of the geometry
+	 */
+	public abstract void setMinCoordinates();
+
+	
 
 }

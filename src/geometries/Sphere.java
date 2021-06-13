@@ -110,21 +110,19 @@ public class Sphere extends Geometry {
 	@Override
 	public void setMaxCoordinates() {
 		
-
-		// TODO Auto-generated method stub
-		double x = center.getX()+ radius;
-		double y = center.getY() +radius;
-		double z = center.getZ() + radius;
+		double x = center._x.coord+ radius;
+		double y = center._y.coord +radius;
+		double z = center._z.coord + radius;
 		maxBoundary = new Point3D(x, y, z);
 		
 	}
 
 	@Override
 	public void setMinCoordinates() {
-		// TODO Auto-generated method stub
-		double x = center.getX()- radius;
-		double y = center.getY()-radius;
-		double z = center.getZ() - radius;
+	
+		double x = center._x.coord- radius;
+		double y = center._y.coord-radius;
+		double z = center._z.coord- radius;
 		minBoundary = new Point3D(x, y, z);
 	}
 

@@ -34,6 +34,8 @@ public class PointLight extends Light implements LightSource {
 	}
 
 	/**
+	 * Setter for kC
+	 * 
 	 * @param kC the kC to set
 	 * @return the object PointLight itself
 	 */
@@ -43,6 +45,8 @@ public class PointLight extends Light implements LightSource {
 	}
 
 	/**
+	 * Setter for kL
+	 * 
 	 * @param kL the kL to set
 	 * @return the object PointLight itself
 	 */
@@ -53,6 +57,7 @@ public class PointLight extends Light implements LightSource {
 
 	
 	 /**
+	 * Setter for kQ
 	 * 
 	 * @param kQ the kQ to set
 	 * @return the object PointLight itself
@@ -62,11 +67,23 @@ public class PointLight extends Light implements LightSource {
 		return this;
 	}
 
+	/**
+	 * Setter for radius
+	 * 
+	 * @param radius of the circle
+	 * @return the object PointLight itself
+	 */
 	public PointLight setRadius(double radius) {
 		this.radius=radius;
 		return this;
 	}
 	
+	/**
+	 * Setter for numOfRays
+	 * 
+	 * @param numOfRays for soft shadows
+	 * @return the object PointLight itself
+	 */
 	public PointLight setNumOfRays(int numOfRays) {
 		this.numOfRays=numOfRays;
 		return this;

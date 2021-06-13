@@ -19,8 +19,8 @@ public class Ray {
 	 */
 	private static final double DELTA = 0.1;
 
-	private Point3D p0;
-	private Vector dir;
+	public Point3D p0;
+	public Vector dir;
 	
 	/**
 	 * Ray constructor receiving Point and direction and normal
@@ -180,26 +180,25 @@ public class Ray {
 		
 		Point3D centerCircle=this.getPoint(distance);
 		Point3D randomPoint;
-		double x,y,d;
-		double nv=alignZero(n.dotProduct(getDir()));
+		double x,y;
+		
 		//A loop that produces rays using random dots
 		for(int i=0; i<numOfRays; i++) {
-			x = random(-1,1);
-			y=Math.sqrt(1-x*x);
-			d=random(-radius, radius);
-			x=alignZero(x*d);
-			y=alignZero(y*d);
+			x = random(-radius, radius);
+			y=random(-radius, radius);
+			
+			x=alignZero(x);
+			y=alignZero(y);
 			randomPoint=centerCircle;
 			if(x!=0)
 				randomPoint=randomPoint.add(nX.scale(x));
 			if(y!=0)
 				randomPoint=randomPoint.add(nY.scale(y));
 			
-			Vector tPoint=randomPoint.subtract(p0);
-			double nt=alignZero(n.dotProduct(tPoint));
-			if(nv*nt>0) {
-				rays.add(new Ray(p0,tPoint));
-			}
+			
+			
+				rays.add(new Ray(p0,randomPoint.subtract(p0)));
+			
 		}
 		
 		return rays;

@@ -80,13 +80,13 @@ public class Tube extends Geometry {
 	}
 
 	@Override
-	protected void setMaxCoordinates() {
+	public void setMaxCoordinates() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void setMinCoordinates() {
+	public void setMinCoordinates() {
 		// TODO Auto-generated method stub
 		
 	}

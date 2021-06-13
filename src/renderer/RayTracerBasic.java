@@ -1,6 +1,4 @@
 package renderer;
-
-import geometries.Geometry;
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
 import primitives.Material;
@@ -10,11 +8,7 @@ import primitives.Vector;
 import scene.Scene;
 import static primitives.Util.*;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import elements.LightSource;
 

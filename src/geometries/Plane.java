@@ -107,17 +107,17 @@ public class Plane extends Geometry {
 	}
 
 	@Override
-	protected void setMaxCoordinates() {
-		// TODO Auto-generated method stub
-		double x = Double.POSITIVE_INFINITY, y = x, z = y;
+	public void setMaxCoordinates() {
+		
+		double x = Double.POSITIVE_INFINITY, y = Double.POSITIVE_INFINITY, z = Double.POSITIVE_INFINITY;
 		maxBoundary = new Point3D(x, y, z);
 		
 	}
 
 	@Override
-	protected void setMinCoordinates() {
-		// TODO Auto-generated method stub
-		double x = Double.NEGATIVE_INFINITY, y = x, z = y;
+	public void setMinCoordinates() {
+		
+		double x = Double.NEGATIVE_INFINITY, y = Double.NEGATIVE_INFINITY, z = Double.NEGATIVE_INFINITY;
 		minBoundary = new Point3D(x, y, z);
 		
 	}

@@ -66,6 +66,8 @@ public abstract class Geometry extends Intersectable{
 	 * @return normalized vector 
 	 */
 	public abstract Vector getNormal(Point3D point3D);
+	
+	
 
 
 }

@@ -9,7 +9,7 @@ import static primitives.Point3D.ZERO;
  *
  */
 public class Vector {
-	Point3D _head;
+	public Point3D _head;
 
 	/**
 	 * Vector constructor receive 3 coordinate values
